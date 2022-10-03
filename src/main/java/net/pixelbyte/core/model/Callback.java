@@ -1,9 +1,8 @@
 package net.pixelbyte.core.model;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public interface Callback {
+public interface Callback<T> {
 
-        void execute(ResultSet resultSet) throws SQLException;
+        void call(T objectType) throws SQLException;
 }

@@ -1,7 +1,6 @@
 package net.pixelbyte.core.user;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import net.pixelbyte.core.CorePlugin;
 import net.pixelbyte.core.rank.Rank;

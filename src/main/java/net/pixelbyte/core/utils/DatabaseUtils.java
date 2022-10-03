@@ -7,6 +7,7 @@ import org.mineacademy.fo.Common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseUtils {
@@ -57,7 +58,7 @@ public class DatabaseUtils {
         }
     }
 
-    public static void executeQuery(String query, Callback callback) {
+    public static void executeQuery(String query, Callback<ResultSet> callback) {
         if (!isConnected()) {
             Common.log("&cYou are not connected to the database!");
             return;
@@ -65,7 +66,7 @@ public class DatabaseUtils {
 
         Common.runAsync(() -> {
             try {
-                callback.execute(connection.createStatement().executeQuery(query));
+                callback.call(connection.createStatement().executeQuery(query));
             } catch (Exception e) {
                 e.printStackTrace();
             }

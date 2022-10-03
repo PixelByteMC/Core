@@ -5,6 +5,7 @@ import net.pixelbyte.core.nametag.NametagManager;
 import net.pixelbyte.core.rank.RankData;
 import net.pixelbyte.core.utils.DatabaseUtils;
 import org.mineacademy.fo.Common;
+import org.mineacademy.fo.Messenger;
 import org.mineacademy.fo.plugin.SimplePlugin;
 
 public class CorePlugin extends SimplePlugin {
@@ -14,6 +15,10 @@ public class CorePlugin extends SimplePlugin {
 
     @Override
     protected void onPluginStart() {
+
+        Common.setTellPrefix("");
+        Messenger.ENABLED = false;
+
         // Connect to database
         DatabaseUtils.connect(false);
         if (DatabaseUtils.isConnected()) {

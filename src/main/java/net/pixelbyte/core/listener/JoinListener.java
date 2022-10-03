@@ -15,9 +15,9 @@ public final class JoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         event.setJoinMessage(null);
         Player player = event.getPlayer();
-        UserCache.validateUser(player);
-        User user = UserCache.getUser(player);
-        user.sendNametags();
-        user.setNametag();
+        UserCache.validateUser(player , u -> {
+            u.sendNametags();
+            u.setNametag();
+        });
     }
 }
