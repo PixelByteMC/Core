@@ -37,8 +37,9 @@ public class DatabaseUtils {
         }
 
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true", username, password);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -72,6 +73,33 @@ public class DatabaseUtils {
             }
         });
 
+    }
+
+    public static void executeQuerySync(String query, Callback<ResultSet> callback) {
+        if (!isConnected()) {
+            Common.log("&cYou are not connected to the database!");
+            return;
+        }
+
+        try {
+            callback.call(connection.createStatement().executeQuery(query));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void executeUpdateSync(String query) {
+        if (!isConnected()) {
+            Common.log("&cYou are not connected to the database!");
+            return;
+        }
+
+        try {
+            connection.createStatement().executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void executeUpdate(String query) {

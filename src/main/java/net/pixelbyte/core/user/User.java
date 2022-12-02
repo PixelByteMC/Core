@@ -3,13 +3,16 @@ package net.pixelbyte.core.user;
 import lombok.Getter;
 import lombok.Setter;
 import net.pixelbyte.core.CorePlugin;
+import net.pixelbyte.core.friend.FriendManager;
 import net.pixelbyte.core.rank.Rank;
 import net.pixelbyte.core.rank.RankData;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -25,6 +28,8 @@ public class User extends OfflineUser {
 
     private Rank rank = RankData.getDefaultRank();
     private int coins = 0;
+
+    private List<OfflineUser> friends = new ArrayList<>();
 
     /*--- Coins ---*/
     public void addCoins(int amount) {
@@ -68,5 +73,9 @@ public class User extends OfflineUser {
         for (String permission : rank.getPermissions()) {
             permissionAttachment.setPermission(permission, true);
         }
+    }
+
+    public void updateFriends() {
+        FriendManager.updateFriends(this);
     }
 }

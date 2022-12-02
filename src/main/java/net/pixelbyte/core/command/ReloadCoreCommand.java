@@ -13,7 +13,7 @@ import java.util.List;
 @AutoRegister
 public final class ReloadCoreCommand extends CustomCommand {
     public ReloadCoreCommand() {
-        super("reloadcore");
+        super("reloadcore", "Admin");
     }
 
     @Override

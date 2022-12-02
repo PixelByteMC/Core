@@ -11,6 +11,11 @@ public abstract class CustomCommand extends SimpleCommand {
 
     public CustomCommand(String label) {
         super(label);
+        setPermission(null);
+    }
+
+    public CustomCommand(String label, String minRank) {
+        super(label);
     }
 
     @Override

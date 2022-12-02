@@ -10,6 +10,8 @@ import java.util.UUID;
 @Setter
 public class OfflineUser {
 
+    int id;
+
     UUID uniqueId;
 
     String name;
