@@ -1,7 +1,7 @@
 package net.pixelbyte.core;
 
 import lombok.Getter;
-import net.pixelbyte.core.nametag.NametagManager;
+import net.pixelbyte.core.utils.nametag.NametagManager;
 import net.pixelbyte.core.rank.RankData;
 import net.pixelbyte.core.utils.DatabaseUtils;
 import org.mineacademy.fo.Common;

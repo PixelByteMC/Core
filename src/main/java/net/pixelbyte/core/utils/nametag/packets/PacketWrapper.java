@@ -1,4 +1,4 @@
-package net.pixelbyte.core.nametag.packets;
+package net.pixelbyte.core.utils.nametag.packets;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

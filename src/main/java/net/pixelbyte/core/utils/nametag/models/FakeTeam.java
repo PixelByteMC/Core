@@ -1,7 +1,7 @@
-package net.pixelbyte.core.nametag.models;
+package net.pixelbyte.core.utils.nametag.models;
 
 import lombok.Data;
-import net.pixelbyte.core.nametag.NametagManager;
+import net.pixelbyte.core.utils.nametag.NametagManager;
 
 import java.util.ArrayList;
 

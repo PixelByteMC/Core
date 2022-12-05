@@ -6,6 +6,7 @@ import net.pixelbyte.core.CorePlugin;
 import net.pixelbyte.core.friend.FriendManager;
 import net.pixelbyte.core.rank.Rank;
 import net.pixelbyte.core.rank.RankData;
+import net.pixelbyte.core.utils.scoreboard.PlayerBoard;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
@@ -25,6 +26,8 @@ public class User extends OfflineUser {
 
     private Player player;
     private PermissionAttachment permissionAttachment;
+
+    private PlayerBoard playerBoard;
 
     private Rank rank = RankData.getDefaultRank();
     private int coins = 0;

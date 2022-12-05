@@ -1,8 +1,8 @@
-package net.pixelbyte.core.nametag;
+package net.pixelbyte.core.utils.nametag;
 
 import lombok.AllArgsConstructor;
-import net.pixelbyte.core.nametag.models.FakeTeam;
-import net.pixelbyte.core.nametag.packets.PacketWrapper;
+import net.pixelbyte.core.utils.nametag.models.FakeTeam;
+import net.pixelbyte.core.utils.nametag.packets.PacketWrapper;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

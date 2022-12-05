@@ -1,7 +1,7 @@
 package net.pixelbyte.core.api;
 
 import net.pixelbyte.core.CorePlugin;
-import net.pixelbyte.core.nametag.NametagManager;
+import net.pixelbyte.core.utils.nametag.NametagManager;
 import net.pixelbyte.core.user.User;
 import net.pixelbyte.core.user.UserCache;
 
