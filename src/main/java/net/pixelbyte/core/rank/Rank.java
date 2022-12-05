@@ -2,6 +2,10 @@ package net.pixelbyte.core.rank;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.pixelbyte.core.user.User;
+import net.pixelbyte.core.user.UserCache;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.mineacademy.fo.Common;
 
 import java.util.ArrayList;
@@ -22,5 +26,18 @@ public class Rank {
         this.tabPrefix = Common.colorize(tabPrefix);
         this.weight = weight;
         this.permissions = new ArrayList<>();
+    }
+
+    public void addPermission(String permission) {
+        this.permissions.add(permission);
+    }
+
+    public void refreshPermissions() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            User user = UserCache.getUser(player.getUniqueId());
+            if (user.getRank() == this) {
+                user.setPermissions();
+            }
+        }
     }
 }

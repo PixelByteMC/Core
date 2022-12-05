@@ -14,7 +14,7 @@ import java.util.List;
 public final class FriendCommand extends CustomCommand {
 
     public FriendCommand() {
-        super("friends|friend|f", "Player");
+        super("friends|friend|f", "Admin");
     }
 
     @Override

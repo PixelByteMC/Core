@@ -19,6 +19,8 @@ public final class JoinListener implements Listener {
         User user = UserCache.getUser(player);
 
         user.setName(player.getName());
+
+        user.setPermissions();
         user.sendNametags();
         user.setNametag();
 

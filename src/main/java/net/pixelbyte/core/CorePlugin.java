@@ -1,6 +1,8 @@
 package net.pixelbyte.core;
 
 import lombok.Getter;
+import net.pixelbyte.core.command.TestCommand;
+import net.pixelbyte.core.model.CustomCommand;
 import net.pixelbyte.core.utils.nametag.NametagManager;
 import net.pixelbyte.core.rank.RankData;
 import net.pixelbyte.core.utils.DatabaseUtils;
@@ -15,7 +17,6 @@ public class CorePlugin extends SimplePlugin {
 
     @Override
     protected void onPluginStart() {
-
         Common.setTellPrefix("");
         Messenger.ENABLED = false;
 
@@ -30,7 +31,7 @@ public class CorePlugin extends SimplePlugin {
 
         RankData.loadRanks();
 
-        nametagManager = new NametagManager();
 
+        nametagManager = new NametagManager();
     }
 }

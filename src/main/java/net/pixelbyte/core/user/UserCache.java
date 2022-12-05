@@ -108,7 +108,7 @@ public class UserCache {
                 if (resultSet.next()) {
                     // set user values
                     //user.setName(resultSet.getString("name"));
-                    user.setRank(RankData.getRankByName(resultSet.getString("rank")));
+                    user.setRank(RankData.getRank(resultSet.getString("rank")));
                     user.setCoins(resultSet.getInt("coins"));
                 } else {
                     // create new user in database
@@ -129,7 +129,7 @@ public class UserCache {
                 if (resultSet.next()) {
                     // set user values
                     //user.setName(resultSet.getString("name"));
-                    user.setRank(RankData.getRankByName(resultSet.getString("rank")));
+                    user.setRank(RankData.getRank(resultSet.getString("rank")));
                     user.setCoins(resultSet.getInt("coins"));
                 } else {
                     // create new user in database
@@ -200,7 +200,7 @@ public class UserCache {
             try {
                 if (resultSet.next()) {
                     // set user values
-                    user.setRank(RankData.getRankByName(resultSet.getString("rank")));
+                    user.setRank(RankData.getRank(resultSet.getString("rank")));
                     user.setCoins(resultSet.getInt("coins"));
                     FriendManager.updateFriends(user);
                     updatePlayerInfo(user);
@@ -218,7 +218,7 @@ public class UserCache {
                 if (resultSet.next()) {
                     // set user values
                     user.setId(resultSet.getInt("id"));
-                    user.setRank(RankData.getRankByName(resultSet.getString("rank")));
+                    user.setRank(RankData.getRank(resultSet.getString("rank")));
                     user.setCoins(resultSet.getInt("coins"));
                     FriendManager.updateFriends(user);
                     updatePlayerInfo(user);

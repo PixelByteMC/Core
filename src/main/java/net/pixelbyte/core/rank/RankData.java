@@ -1,6 +1,7 @@
 package net.pixelbyte.core.rank;
 
 import lombok.Getter;
+import net.pixelbyte.core.model.CustomCommand;
 import net.pixelbyte.core.settings.PermissionsSettings;
 import net.pixelbyte.core.utils.DatabaseUtils;
 
@@ -32,24 +33,26 @@ public class RankData {
                 inheritanceStrings.put(rank, resultSet.getString("inheritance"));
             }
 
+            CustomCommand.loadPermissions();
+
+            if (permissionsSettings == null) {
+                permissionsSettings = new PermissionsSettings();
+            }
+
             for (Map.Entry<Rank, String> entry : inheritanceStrings.entrySet()) {
                 Rank rank = entry.getKey();
                 String inheritanceString = entry.getValue();
                 if (inheritanceString != null) {
-                    Rank inheritance = getRankByName(inheritanceString);
+                    Rank inheritance = getRank(inheritanceString);
                     if (inheritance != null) {
                         rank.setInheritance(inheritance);
                     }
                 }
             }
         });
-
-        if (permissionsSettings == null) {
-            permissionsSettings = new PermissionsSettings();
-        }
     }
 
-    public static Rank getRankByName(String name) {
+    public static Rank getRank(String name) {
         if (name == null || name.isEmpty()) return null;
 
         for (Rank rank : ranks) {
@@ -68,6 +71,6 @@ public class RankData {
     }
 
     public static Rank getDefaultRank() {
-        return getRankByName("Player");
+        return getRank("Player");
     }
 }
