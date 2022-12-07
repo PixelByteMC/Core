@@ -1,8 +1,7 @@
 package net.pixelbyte.core;
 
 import lombok.Getter;
-import net.pixelbyte.core.command.TestCommand;
-import net.pixelbyte.core.model.CustomCommand;
+import net.pixelbyte.core.utils.BungeecordUtil;
 import net.pixelbyte.core.utils.nametag.NametagManager;
 import net.pixelbyte.core.rank.RankData;
 import net.pixelbyte.core.utils.DatabaseUtils;
@@ -14,6 +13,8 @@ public class CorePlugin extends SimplePlugin {
 
     @Getter
     private static NametagManager nametagManager;
+    @Getter
+    private static BungeecordUtil bungeecordUtil;
 
     @Override
     protected void onPluginStart() {
@@ -33,5 +34,7 @@ public class CorePlugin extends SimplePlugin {
 
 
         nametagManager = new NametagManager();
+
+        bungeecordUtil = new BungeecordUtil(this);
     }
 }

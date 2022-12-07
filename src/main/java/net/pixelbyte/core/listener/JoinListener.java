@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
+import org.mineacademy.fo.Common;
 import org.mineacademy.fo.annotation.AutoRegister;
 
 @AutoRegister
@@ -25,6 +26,9 @@ public final class JoinListener implements Listener {
         user.setNametag();
 
         UserCache.updatePlayerInfo(user);
+
+        player.setPlayerListHeaderFooter(Common.colorize("&e&lPixel&6&lByte&e&lMC\n"),
+                Common.colorize("\n&d&lBuy ranks at &e&lstore.pixelbytemc.net"));
     }
 
     @EventHandler
