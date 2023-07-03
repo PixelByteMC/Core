@@ -15,7 +15,7 @@ public final class TestCommand extends CustomCommand {
     @Override
     protected void onCommand(Player player, User user) {
 
-        tell("&aHello world!");
+        user.sendMessage("&aHello World!");
 
     }
 }

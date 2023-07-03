@@ -192,7 +192,7 @@ public class UserCache {
 
 
     private static void saveNewUser(User user) {
-        DatabaseUtils.executeUpdate("INSERT INTO players (id, uuid, name, rank, coins, friends) VALUES (default, '" + user.getUniqueId() + "', '"+ user.getName() + "', '" + user.getRank().getName() + "', 0, '')");
+        DatabaseUtils.executeUpdate("INSERT INTO players (id, uuid, name, rank, coins, vanished, friends) VALUES (default, '" + user.getUniqueId() + "', '"+ user.getName() + "', '" + user.getRank().getName() + "', 0, 0, '')");
     }
 
     private static void refreshUser(User user, Callback<User> callback) {
@@ -202,7 +202,7 @@ public class UserCache {
                     // set user values
                     user.setRank(RankData.getRank(resultSet.getString("rank")));
                     user.setCoins(resultSet.getInt("coins"));
-                    FriendManager.updateFriends(user);
+                    user.setVanished(resultSet.getBoolean("vanished"));
                     updatePlayerInfo(user);
                     callback.call(user);
                 }
@@ -220,7 +220,6 @@ public class UserCache {
                     user.setId(resultSet.getInt("id"));
                     user.setRank(RankData.getRank(resultSet.getString("rank")));
                     user.setCoins(resultSet.getInt("coins"));
-                    FriendManager.updateFriends(user);
                     updatePlayerInfo(user);
                 }
             } catch (Exception e) {

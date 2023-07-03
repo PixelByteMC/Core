@@ -27,7 +27,8 @@ public class RankData {
                         resultSet.getString("name"),
                         resultSet.getString("chat_prefix"),
                         resultSet.getString("tab_prefix"),
-                        resultSet.getInt("weight")
+                        resultSet.getInt("weight"),
+                        resultSet.getBoolean("staff")
                 );
                 ranks.add(rank);
                 inheritanceStrings.put(rank, resultSet.getString("inheritance"));

@@ -1,12 +1,16 @@
 package net.pixelbyte.core.listener;
 
+import net.pixelbyte.core.model.BungeeMessage;
+import net.pixelbyte.core.rank.Rank;
 import net.pixelbyte.core.user.User;
 import net.pixelbyte.core.user.UserCache;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
+import org.mineacademy.fo.BungeeUtil;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.annotation.AutoRegister;
 
@@ -29,6 +33,8 @@ public final class JoinListener implements Listener {
 
         player.setPlayerListHeaderFooter(Common.colorize("&e&lPixel&6&lByte&e&lMC\n"),
                 Common.colorize("\n&d&lBuy ranks at &e&lstore.pixelbytemc.net"));
+
+        BungeeUtil.sendPluginMessage(BungeeMessage.STAFF_JOIN, player.getUniqueId(), Bukkit.getServer().getName());
     }
 
     @EventHandler

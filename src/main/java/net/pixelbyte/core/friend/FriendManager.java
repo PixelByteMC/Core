@@ -2,50 +2,79 @@ package net.pixelbyte.core.friend;
 
 import net.pixelbyte.core.model.Callback;
 import net.pixelbyte.core.user.User;
-import net.pixelbyte.core.user.UserCache;
 import net.pixelbyte.core.utils.DatabaseUtils;
 
-/*
-  Table structure for table `friends`
-  -----------------------------------
-  PlayerID uuid | FriendID uui=d
-  -----------------------------------
-
- */
+import java.util.ArrayList;
+import java.util.List;
 
 public class FriendManager {
 
-    public static void updateFriends(User user) {
+    public static void sendFriendRequest(User user, User friend) {
+
+        DatabaseUtils.executeUpdate("INSERT INTO friend_requests (sender_id, recipient_id, status) VALUES (" + user.getId() + ", " + friend.getId() + ", 'pending');");
+
 
     }
 
-    public static void addFriend(User user, String name, Callback<FriendStatus> callback) {
+    public static void acceptFriendRequest(int requestId) {
 
-        UserCache.getOfflineUserFromDatabase(name, target -> {
-            if (target == null) {
-                callback.call(FriendStatus.NOT_FOUND);
-            } else {
-                /*
-                if (target.getUniqueId().equals(user.getUniqueId())) {
-                    callback.call(FriendError.SELF);
-                    return;
+        DatabaseUtils.executeUpdate("UPDATE friend_requests SET status = 'accepted' WHERE id = " + requestId + ";");
+
+    }
+
+    public static void denyFriendRequest(int requestId) {
+
+        DatabaseUtils.executeUpdate("UPDATE friend_requests SET status = 'denied' WHERE id = " + requestId + ";");
+
+    }
+
+    public static void getFriendRequest(int requestId, Callback<FriendRequest> callback) {
+
+        DatabaseUtils.executeQuery("SELECT * FROM friend_requests WHERE id = " + requestId + ";", resultSet -> {
+            try {
+                if (resultSet.next()) {
+
+                    int senderId = resultSet.getInt("sender_id");
+                    int recipientId = resultSet.getInt("recipient_id");
+                    String status = resultSet.getString("status");
+
+                    callback.call(new FriendRequest(requestId, senderId, recipientId, status));
+
+                } else {
+                    callback.call(null);
                 }
 
-                 */
-
-                DatabaseUtils.executeQuery("SELECT * FROM friends WHERE PlayerID = " + user.getUniqueId() +" AND FriendID = " + target.getUniqueId() + ";", result -> {
-                    if (result.next()) {
-                        callback.call(FriendStatus.ALREADY_FRIENDS);
-                    } else {
-                        DatabaseUtils.executeUpdate("INSERT INTO friends (PlayerID, FriendID) VALUES (" + user.getUniqueId() + ", " + target.getUniqueId() + ");");
-                        callback.call(FriendStatus.SUCCESS);
-                    }
-                });
-
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
 
     }
 
-    public static void removeFriend(User user, String name) {}
+    public static void getFriendRequests(User user, Callback<List<FriendRequest>> callback) {
+
+        DatabaseUtils.executeQuery("SELECT * FROM friend_requests WHERE recipient_id = " + user.getId() + ";", resultSet -> {
+            try {
+
+                List<FriendRequest> friendRequests = new ArrayList<>();
+
+                while (resultSet.next()) {
+
+                    int requestId = resultSet.getInt("id");
+                    int senderId = resultSet.getInt("sender_id");
+                    int recipientId = resultSet.getInt("recipient_id");
+                    String status = resultSet.getString("status");
+
+                    friendRequests.add(new FriendRequest(requestId, senderId, recipientId, status));
+
+                }
+
+                callback.call(friendRequests);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+    }
 }

@@ -1,14 +1,11 @@
 package net.pixelbyte.core.command;
 
 import net.pixelbyte.core.friend.FriendManager;
-import net.pixelbyte.core.friend.FriendStatus;
 import net.pixelbyte.core.model.CustomCommand;
-import net.pixelbyte.core.user.OfflineUser;
 import net.pixelbyte.core.user.User;
+import net.pixelbyte.core.user.UserCache;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.mineacademy.fo.annotation.AutoRegister;
-
-import java.util.List;
 
 //@AutoRegister
 public final class FriendCommand extends CustomCommand {
@@ -24,33 +21,14 @@ public final class FriendCommand extends CustomCommand {
         } else {
             switch (args[0]) {
                 case "add":
-                    FriendManager.addFriend(user, args[1], c -> {
-                        if (c == FriendStatus.ALREADY_FRIENDS) {
-                            tell("&cYou are already friends with this player!");
-                        } else if (c == FriendStatus.NOT_FOUND) {
-                            tell("&cPlayer not found!");
-                        } else if (c == FriendStatus.SUCCESS) {
-                            tell("&aYou are now friends with " + args[1]);
-                           // UserCache.getOfflineUserFromDatabase(args[1], u -> {
 
-                            //});
-                        }
-                    });
+                    User target = UserCache.getUser(findPlayer(args[1], "&cPlayer " + args[1] + "not found"));
+
                     break;
                 case "remove":
                     break;
                 case "list":
-                    // list the user's friends
-                    FriendManager.updateFriends(user);
-                    List<OfflineUser> friends = user.getFriends();
-                    if (friends.size() == 0) {
-                        tell("&cYou have no friends :(");
-                    } else {
-                        tell("&aYour friends:");
-                        for (OfflineUser friend : friends) {
-                            tell("&a- " + friend.getName());
-                        }
-                    }
+
                     break;
                 default:
                     tell("&c/friends <add|remove|list>");

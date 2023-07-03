@@ -19,25 +19,18 @@ public class Rank {
     private int weight;
     private List<String> permissions;
     private Rank inheritance = null;
+    private boolean isStaff;
 
-    public Rank(final String name, String chatPrefix, String tabPrefix, final int weight) {
+    public Rank(final String name, String chatPrefix, String tabPrefix, final int weight, boolean isStaff) {
         this.name = Common.colorize(name);
         this.chatPrefix = Common.colorize(chatPrefix);
         this.tabPrefix = Common.colorize(tabPrefix);
         this.weight = weight;
         this.permissions = new ArrayList<>();
+        this.isStaff = isStaff;
     }
 
     public void addPermission(String permission) {
         this.permissions.add(permission);
-    }
-
-    public void refreshPermissions() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            User user = UserCache.getUser(player.getUniqueId());
-            if (user.getRank() == this) {
-                user.setPermissions();
-            }
-        }
     }
 }
